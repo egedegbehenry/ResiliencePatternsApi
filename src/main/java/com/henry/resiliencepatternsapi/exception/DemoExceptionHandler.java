@@ -4,6 +4,7 @@ import com.henry.resiliencepatternsapi.controller.CircuitBreakerDemoController;
 import com.henry.resiliencepatternsapi.controller.RetryDemoController;
 import com.henry.resiliencepatternsapi.controller.RateLimiterDemoController;
 import com.henry.resiliencepatternsapi.controller.BulkheadDemoController;
+import com.henry.resiliencepatternsapi.controller.TimeLimiterDemoController;
 import io.github.resilience4j.bulkhead.BulkheadFullException;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
@@ -13,12 +14,26 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Map;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.TimeoutException;
 
 @RestControllerAdvice(assignableTypes = {
         CircuitBreakerDemoController.class, RetryDemoController.class,
-        RateLimiterDemoController.class, BulkheadDemoController.class
+        RateLimiterDemoController.class, BulkheadDemoController.class, TimeLimiterDemoController.class
 })
 public class DemoExceptionHandler {
+
+    @ExceptionHandler(TimeoutException.class)
+    public ResponseEntity<Map<String, String>> downstreamTimeout() {
+        return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT)
+                .body(Map.of("message", "Downstream service timed out"));
+    }
+
+    @ExceptionHandler(RejectedExecutionException.class)
+    public ResponseEntity<Map<String, String>> executorFull() {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(Map.of("message", "Downstream executor is busy; try again later"));
+    }
 
     @ExceptionHandler(BulkheadFullException.class)
     public ResponseEntity<Map<String, String>> bulkheadFull() {
