@@ -2,6 +2,8 @@ package com.henry.resiliencepatternsapi.exception;
 
 import com.henry.resiliencepatternsapi.controller.CircuitBreakerDemoController;
 import com.henry.resiliencepatternsapi.controller.RetryDemoController;
+import com.henry.resiliencepatternsapi.controller.RateLimiterDemoController;
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +12,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Map;
 
-@RestControllerAdvice(assignableTypes = {CircuitBreakerDemoController.class, RetryDemoController.class})
+@RestControllerAdvice(assignableTypes = {
+        CircuitBreakerDemoController.class, RetryDemoController.class, RateLimiterDemoController.class
+})
 public class DemoExceptionHandler {
+
+    @ExceptionHandler(RequestNotPermitted.class)
+    public ResponseEntity<Map<String, String>> rateLimitExceeded() {
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .header("Retry-After", "10")
+                .body(Map.of("message", "Rate limit exceeded; try again later"));
+    }
 
     @ExceptionHandler(DownstreamUnavailableException.class)
     public ResponseEntity<Map<String, String>> downstreamUnavailable(DownstreamUnavailableException exception) {
