@@ -3,6 +3,8 @@ package com.henry.resiliencepatternsapi.exception;
 import com.henry.resiliencepatternsapi.controller.CircuitBreakerDemoController;
 import com.henry.resiliencepatternsapi.controller.RetryDemoController;
 import com.henry.resiliencepatternsapi.controller.RateLimiterDemoController;
+import com.henry.resiliencepatternsapi.controller.BulkheadDemoController;
+import io.github.resilience4j.bulkhead.BulkheadFullException;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import org.springframework.http.HttpStatus;
@@ -13,9 +15,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.Map;
 
 @RestControllerAdvice(assignableTypes = {
-        CircuitBreakerDemoController.class, RetryDemoController.class, RateLimiterDemoController.class
+        CircuitBreakerDemoController.class, RetryDemoController.class,
+        RateLimiterDemoController.class, BulkheadDemoController.class
 })
 public class DemoExceptionHandler {
+
+    @ExceptionHandler(BulkheadFullException.class)
+    public ResponseEntity<Map<String, String>> bulkheadFull() {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(Map.of("message", "Bulkhead is full; try again later"));
+    }
 
     @ExceptionHandler(RequestNotPermitted.class)
     public ResponseEntity<Map<String, String>> rateLimitExceeded() {
