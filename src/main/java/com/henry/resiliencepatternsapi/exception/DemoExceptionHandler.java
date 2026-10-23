@@ -1,6 +1,7 @@
 package com.henry.resiliencepatternsapi.exception;
 
 import com.henry.resiliencepatternsapi.controller.CircuitBreakerDemoController;
+import com.henry.resiliencepatternsapi.controller.RetryDemoController;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Map;
 
-@RestControllerAdvice(assignableTypes = CircuitBreakerDemoController.class)
+@RestControllerAdvice(assignableTypes = {CircuitBreakerDemoController.class, RetryDemoController.class})
 public class DemoExceptionHandler {
 
     @ExceptionHandler(DownstreamUnavailableException.class)

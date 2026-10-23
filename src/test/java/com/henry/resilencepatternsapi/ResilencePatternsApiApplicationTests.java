@@ -80,4 +80,36 @@ class ResilencePatternsApiApplicationTests {
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
+    @Test
+    void retryReturnsAttemptCountsAnd503AfterExhaustion() throws Exception {
+        try (HttpClient client = HttpClient.newHttpClient()) {
+            for (int failTimes = 0; failTimes < 3; failTimes++) {
+                HttpResponse<String> response = callRetry(client, Integer.toString(failTimes));
+                assertThat(response.statusCode()).isEqualTo(200);
+                assertThat(response.body()).contains("\"attempts\":" + (failTimes + 1));
+                assertThat(response.body()).contains("Simulated downstream service responded successfully");
+            }
+            HttpResponse<String> failure = callRetry(client, "3");
+            assertThat(failure.statusCode()).isEqualTo(503);
+            assertThat(failure.body()).isEqualTo(
+                    "{\"message\":\"Simulated downstream service is unavailable\"}");
+        }
+    }
+
+    @Test
+    void retryRejectsInvalidInput() throws Exception {
+        try (HttpClient client = HttpClient.newHttpClient()) {
+            for (String value : new String[]{"-1", "4", "abc"}) {
+                assertThat(callRetry(client, value).statusCode()).isEqualTo(400);
+            }
+        }
+    }
+
+    private HttpResponse<String> callRetry(HttpClient client, String failTimes) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:" + port + "/api/demo/retry?failTimes=" + failTimes))
+                .GET().build();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
 }
