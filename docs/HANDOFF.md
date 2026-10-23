@@ -1,50 +1,46 @@
-# Resume notes — 23 October 2026
+﻿# Project handoff - 24 October 2026
 
-Work paused at the user's request after completing and validating the k6 stage.
+## Final local state
 
-## Project and Git
+- Actual project directory: `C:\Users\egede\IdeaProjects\resilence-patterns-api`.
+- Java 21, Spring Boot 4.1.1, Maven Wrapper, Resilience4j 2.4.0.
+- All completed feature stages are to be integrated into `master` by fast-forward.
+  Feature branches are retained as history checkpoints.
+- The user authorized final commits and pushing on 24 October 2026.
+  No Git remote was configured at the start of finalization; the exact destination
+  was requested from the user. Verify `git remote -v`, `git status -sb` and remote
+  refs to establish push status rather than assuming publication succeeded.
+- Git author identity is configured locally with the confirmed GitHub noreply address.
+- The entry point remains `com.henry.resilencepatternsapi.ResilencePatternsApiApplication`.
+  Features use `com.henry.resiliencepatternsapi`; scanning covers both spellings.
 
-- Actual project: `C:\Users\egede\IdeaProjects\resilence-patterns-api` (directory spelling is intentional here).
-- Java 21, Spring Boot 4.1.1, Maven wrapper.
-- Resume branch: `feature/k6-performance-tests`.
-- `master` contains the starter/404 fix; subsequent feature branches build on each other.
-  Features have not been merged into `master` or pushed to GitHub.
-- Git identity is configured locally for Henry Egedegbe with the confirmed GitHub noreply address.
-- Application entry point remains `com.henry.resilencepatternsapi.ResilencePatternsApiApplication`.
-  Feature packages use `com.henry.resiliencepatternsapi`; component scanning includes both spellings.
+## Completed
 
-## Completed stages
+- Controller/package fix and hello endpoint.
+- Circuit Breaker, Retry, Rate Limiter, Bulkhead and Time Limiter demos.
+- Explicit fallback responses and independent inventory/payment circuit breakers.
+- Actuator health and Micrometer metrics for the existing resilience instances.
+- Five k6 scenarios, recorded results and run instructions under `performance/`.
+- Main `README.md` with setup, endpoints, configuration, tests and limitations.
 
-1. Corrected controller package and verified `/api/demo/hello`.
-2. Circuit Breaker, Retry, Rate Limiter, Bulkhead and Time Limiter demos.
-3. Explicit fallback responses; fallback and original demo share `demoDownstream`.
-4. Independent `inventoryService` and `paymentService` circuit breakers.
-5. Actuator health and Micrometer resilience metrics.
-6. k6 baseline and resilience checks in `performance/`.
+## Validation
 
-## Validation and artifacts
+- On 24 October: workspace `mvnw.cmd clean verify` succeeded, all 41 tests passed
+  and executable JAR packaging succeeded. Earlier workspace file locks did not recur.
+- On 23 October: all five k6 scripts passed, 1047 checks, no unexpected HTTP failures.
+  See `performance/VALIDATION.md` for measurements and their limitations.
+- k6 used an official portable v2.3.0 binary in a temporary directory, not a system
+  installation. See `performance/README.md` for future run commands.
+- The temporary k6 application was stopped. Check process ownership before starting
+  or stopping applications on port 8080.
+- `performance/results/` and `target/` are ignored generated output, not project source.
+  A clean build may remove logs under `target/`; durable results are in the tracked
+  performance validation document.
 
-- Latest Java monitoring build: `clean verify`, 41 tests passed, packaging succeeded.
-- k6 v2.3.0: all five scripts passed, 1047 checks, no unexpected HTTP failures.
-- Full measurements: `performance/VALIDATION.md`; run commands: `performance/README.md`.
-- Monitoring examples: `docs/monitoring.md`.
-- Raw k6 results are preserved locally in `performance/results/` and ignored by Git.
-- `target/manual-circuit-breaker.log` is generated output, ignored by Git, and contains
-  the earlier CLOSED → OPEN → HALF_OPEN → CLOSED sequence.
-- k6 was run from an official portable release in a temporary directory, not installed
-  on PATH. Install k6 or use the portable executable's full path for future runs.
-- The temporary application used for k6 was stopped. Do not stop an IntelliJ instance
-  or reuse port 8080 without checking ownership.
-- Earlier Windows file locks in the workspace's `target/` blocked cleanup/repackaging.
-  Clean builds were validated in temporary copies of the current source instead.
+## Remaining publication work
 
-## Next session
-
-1. Inspect Git status and confirm the resume branch before editing.
-2. Write the main professional README: setup, package layout, endpoint catalogue,
-   resilience configuration, tests, monitoring, k6 instructions and measured limitations.
-3. Review remaining assignment requirements and Git branch integration with the user.
-4. Obtain approval before commits, pushes, major dependencies or substantial architecture changes.
-
-Keep stages small and explanations beginner-friendly. Include exact file paths and relevant
-line numbers when explaining important changes. Do not push without explicit approval.
+If no push has yet been verified, obtain the exact repository URL, inspect remote
+history, integrate safely if needed, and push the completed master branch without
+force. Do not guess a destination or create a repository with an assumed visibility.
+No production deployment, real downstream integrations, persistent metrics storage,
+Prometheus scrape setup or Grafana dashboard is included in this educational project.
