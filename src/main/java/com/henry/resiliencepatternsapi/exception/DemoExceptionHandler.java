@@ -5,6 +5,7 @@ import com.henry.resiliencepatternsapi.controller.RetryDemoController;
 import com.henry.resiliencepatternsapi.controller.RateLimiterDemoController;
 import com.henry.resiliencepatternsapi.controller.BulkheadDemoController;
 import com.henry.resiliencepatternsapi.controller.TimeLimiterDemoController;
+import com.henry.resiliencepatternsapi.controller.DownstreamDemoController;
 import io.github.resilience4j.bulkhead.BulkheadFullException;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
@@ -19,7 +20,8 @@ import java.util.concurrent.TimeoutException;
 
 @RestControllerAdvice(assignableTypes = {
         CircuitBreakerDemoController.class, RetryDemoController.class,
-        RateLimiterDemoController.class, BulkheadDemoController.class, TimeLimiterDemoController.class
+        RateLimiterDemoController.class, BulkheadDemoController.class,
+        TimeLimiterDemoController.class, DownstreamDemoController.class
 })
 public class DemoExceptionHandler {
 

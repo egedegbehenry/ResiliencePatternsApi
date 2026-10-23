@@ -17,6 +17,20 @@ public class CircuitBreakerConfiguration {
 
     @Bean
     public CircuitBreaker demoCircuitBreaker() {
+        return createCircuitBreaker("demoDownstream");
+    }
+
+    @Bean
+    public CircuitBreaker inventoryCircuitBreaker() {
+        return createCircuitBreaker("inventoryService");
+    }
+
+    @Bean
+    public CircuitBreaker paymentCircuitBreaker() {
+        return createCircuitBreaker("paymentService");
+    }
+
+    private CircuitBreaker createCircuitBreaker(String name) {
         CircuitBreakerConfig config = CircuitBreakerConfig.custom()
                 .slidingWindowType(CircuitBreakerConfig.SlidingWindowType.COUNT_BASED)
                 .slidingWindowSize(5)
@@ -27,7 +41,7 @@ public class CircuitBreakerConfiguration {
                 .recordExceptions(DownstreamUnavailableException.class)
                 .build();
 
-        CircuitBreaker breaker = CircuitBreaker.of("demoDownstream", config);
+        CircuitBreaker breaker = CircuitBreaker.of(name, config);
         breaker.getEventPublisher().onStateTransition(event ->
                 log.info("Circuit breaker {}: {}", event.getCircuitBreakerName(), event.getStateTransition()));
         return breaker;
