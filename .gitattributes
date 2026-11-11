@@ -1,2 +1,4 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
+# Preserve historical performance artifacts byte for byte.
+/docs/migration-backup/performance-results/* -text

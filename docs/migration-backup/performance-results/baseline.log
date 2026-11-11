@@ -1,0 +1,45 @@
+
+
+  â–ˆ THRESHOLDS 
+
+    checks
+    âœ“ 'rate==1' rate=100.00%
+
+    http_req_duration{name:hello}
+    âœ“ 'p(95)<500' p(95)=7ms
+
+    http_req_failed
+    âœ“ 'rate==0' rate=0.00%
+
+    http_reqs
+    âœ“ 'count>0' count=476
+
+
+  â–ˆ TOTAL RESULTS 
+
+    checks_total.......: 950     92.722788/s
+    checks_succeeded...: 100.00% 950 out of 950
+    checks_failed......: 0.00%   0 out of 950
+
+    âœ“ hello returns 200
+    âœ“ hello returns expected message
+
+    HTTP
+    http_req_duration..............: avg=4.69ms   min=1.11ms   med=4.14ms   max=219.41ms p(90)=6.1ms    p(95)=7.02ms  
+      { expected_response:true }...: avg=4.69ms   min=1.11ms   med=4.14ms   max=219.41ms p(90)=6.1ms    p(95)=7.02ms  
+      { name:hello }...............: avg=4.23ms   min=1.11ms   med=4.14ms   max=15.13ms  p(90)=6.07ms   p(95)=7ms     
+    http_req_failed................: 0.00% 0 out of 476
+    http_reqs......................: 476   46.458997/s
+
+    EXECUTION
+    iteration_duration.............: avg=105.33ms min=101.55ms med=105.07ms max=117.31ms p(90)=107.09ms p(95)=108.36ms
+    iterations.....................: 475   46.361394/s
+    vus............................: 5     min=5        max=5
+    vus_max........................: 5     min=5        max=5
+
+    NETWORK
+    data_received..................: 75 kB 7.3 kB/s
+    data_sent......................: 41 kB 3.9 kB/s
+
+
+

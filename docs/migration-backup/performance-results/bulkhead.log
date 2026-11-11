@@ -1,0 +1,49 @@
+
+
+  â–ˆ THRESHOLDS 
+
+    bulkhead_rejections
+    âœ“ 'count>0' count=4
+
+    checks
+    âœ“ 'rate==1' rate=100.00%
+
+    http_req_failed
+    âœ“ 'rate==0' rate=0.00%
+
+    http_reqs
+    âœ“ 'count>0' count=8
+
+
+  â–ˆ TOTAL RESULTS 
+
+    checks_total.......: 14      4.494347/s
+    checks_succeeded...: 100.00% 14 out of 14
+    checks_failed......: 0.00%   0 out of 14
+
+    âœ“ exactly two overlapping calls accepted
+    âœ“ bulkhead response matches success or full capacity
+    âœ“ bulkhead rejects promptly
+    âœ“ bulkhead releases capacity
+
+    CUSTOM
+    bulkhead_rejections............: 4      1.284099/s
+
+    HTTP
+    http_req_duration..............: avg=809.92ms min=4.31ms med=76.61ms max=3.08s p(90)=3.08s p(95)=3.08s
+      { expected_response:true }...: avg=809.92ms min=4.31ms med=76.61ms max=3.08s p(90)=3.08s p(95)=3.08s
+    http_req_failed................: 0.00%  0 out of 8
+    http_reqs......................: 8      2.568199/s
+
+    EXECUTION
+    iteration_duration.............: avg=3.09s    min=3.09s  med=3.09s   max=3.09s p(90)=3.09s p(95)=3.09s
+    iterations.....................: 1      0.321025/s
+    vus............................: 1      min=1      max=1
+    vus_max........................: 1      min=1      max=1
+
+    NETWORK
+    data_received..................: 1.5 kB 475 B/s
+    data_sent......................: 790 B  254 B/s
+
+
+

@@ -4,6 +4,9 @@ A Java 21 learning project demonstrating Resilience4j patterns, independent down
 circuit breakers, Actuator monitoring, automated HTTP tests and Grafana k6 checks.
 Downstream calls are simulated locally; no database, external service or credentials are required.
 
+Moving computers? Follow [NEW_LAPTOP_SETUP.md](NEW_LAPTOP_SETUP.md) for cloning,
+IntelliJ configuration, branch recovery and the separate-backup checklist.
+
 ## Technology
 
 | Component | Version/tool |

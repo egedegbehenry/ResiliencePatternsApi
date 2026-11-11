@@ -1,0 +1,43 @@
+
+
+  â–ˆ THRESHOLDS 
+
+    checks
+    âœ“ 'rate==1' rate=100.00%
+
+    http_req_failed
+    âœ“ 'rate==0' rate=0.00%
+
+    http_reqs
+    âœ“ 'count>0' count=18
+
+
+  â–ˆ TOTAL RESULTS 
+
+    checks_total.......: 17      1.533661/s
+    checks_succeeded...: 100.00% 17 out of 17
+    checks_failed......: 0.00%   0 out of 17
+
+    âœ“ simulated failure or already-open circuit returns 503
+    âœ“ open circuit blocks a healthy request
+    âœ“ healthy downstream returns its own service name
+    âœ“ original demo remains independent
+
+    HTTP
+    http_req_duration..............: avg=3.03ms min=1.52ms med=2.39ms max=7.75ms p(90)=4.86ms p(95)=5.46ms
+      { expected_response:true }...: avg=3.03ms min=1.52ms med=2.39ms max=7.75ms p(90)=4.86ms p(95)=5.46ms
+    http_req_failed................: 0.00%  0 out of 18
+    http_reqs......................: 18     1.623877/s
+
+    EXECUTION
+    iteration_duration.............: avg=11.06s min=11.06s med=11.06s max=11.06s p(90)=11.06s p(95)=11.06s
+    iterations.....................: 1      0.090215/s
+    vus............................: 1      min=1       max=1
+    vus_max........................: 1      min=1       max=1
+
+    NETWORK
+    data_received..................: 3.6 kB 322 B/s
+    data_sent......................: 1.8 kB 160 B/s
+
+
+

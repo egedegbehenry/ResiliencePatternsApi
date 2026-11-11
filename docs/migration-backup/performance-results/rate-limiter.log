@@ -1,0 +1,53 @@
+
+
+  â–ˆ THRESHOLDS 
+
+    checks
+    âœ“ 'rate==1' rate=100.00%
+
+    http_req_failed
+    âœ“ 'rate==0' rate=0.00%
+
+    http_reqs
+    âœ“ 'count>0' count=22
+
+    rate_limit_acceptances
+    âœ“ 'count>0' count=5
+
+    rate_limit_rejections
+    âœ“ 'count>0' count=15
+
+
+  â–ˆ TOTAL RESULTS 
+
+    checks_total.......: 61      5.50133/s
+    checks_succeeded...: 100.00% 61 out of 61
+    checks_failed......: 0.00%   0 out of 61
+
+    âœ“ rate limiter returns success or explicit rejection
+    âœ“ 429 includes Retry-After
+    âœ“ 429 is returned promptly
+    âœ“ rate limiter recovers after refresh
+
+    CUSTOM
+    rate_limit_acceptances.........: 5      0.450929/s
+    rate_limit_rejections..........: 15     1.352786/s
+
+    HTTP
+    http_req_duration..............: avg=2.83ms min=1.51ms med=1.91ms max=10.54ms p(90)=5.35ms p(95)=5.64ms
+      { expected_response:true }...: avg=2.83ms min=1.51ms med=1.91ms max=10.54ms p(90)=5.35ms p(95)=5.64ms
+    http_req_failed................: 0.00%  0 out of 22
+    http_reqs......................: 22     1.984086/s
+
+    EXECUTION
+    iteration_duration.............: avg=11.06s min=11.06s med=11.06s max=11.06s  p(90)=11.06s p(95)=11.06s
+    iterations.....................: 1      0.090186/s
+    vus............................: 1      min=1       max=1
+    vus_max........................: 1      min=1       max=1
+
+    NETWORK
+    data_received..................: 4.1 kB 371 B/s
+    data_sent......................: 2.0 kB 178 B/s
+
+
+

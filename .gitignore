@@ -1,4 +1,3 @@
-HELP.md
 target/
 performance/results/
 .mvn/wrapper/maven-wrapper.jar
@@ -32,3 +31,17 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Local credentials (commit safe templates separately) ###
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+application-local.properties
+application-local.yml
+application-local.yaml

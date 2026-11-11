@@ -1,0 +1,51 @@
+
+
+  â–ˆ THRESHOLDS 
+
+    checks
+    âœ“ 'rate==1' rate=100.00%
+
+    expected_timeouts
+    âœ“ 'count==4' count=4
+
+    http_req_duration{name:time-limit-slow}
+    âœ“ 'p(95)<2000' p(95)=1.02s
+
+    http_req_failed
+    âœ“ 'rate==0' rate=0.00%
+
+    http_reqs
+    âœ“ 'count>0' count=6
+
+
+  â–ˆ TOTAL RESULTS 
+
+    checks_total.......: 5       4.770381/s
+    checks_succeeded...: 100.00% 5 out of 5
+    checks_failed......: 0.00%   0 out of 5
+
+    âœ“ slow call returns explicit timeout
+    âœ“ fast call works after cancellations
+
+    CUSTOM
+    expected_timeouts..............: 4      3.816305/s
+
+    HTTP
+    http_req_duration..............: avg=681.45ms min=3.11ms med=1.02s max=1.02s p(90)=1.02s p(95)=1.02s
+      { expected_response:true }...: avg=681.45ms min=3.11ms med=1.02s max=1.02s p(90)=1.02s p(95)=1.02s
+      { name:time-limit-slow }.....: avg=1.02s    min=1.02s  med=1.02s max=1.02s p(90)=1.02s p(95)=1.02s
+    http_req_failed................: 0.00%  0 out of 6
+    http_reqs......................: 6      5.724457/s
+
+    EXECUTION
+    iteration_duration.............: avg=1.02s    min=1.02s  med=1.02s max=1.02s p(90)=1.02s p(95)=1.02s
+    iterations.....................: 1      0.954076/s
+    vus............................: 1      min=1      max=1
+    vus_max........................: 1      min=1      max=1
+
+    NETWORK
+    data_received..................: 1.0 kB 993 B/s
+    data_sent......................: 598 B  571 B/s
+
+
+

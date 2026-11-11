@@ -1,0 +1,157 @@
+{
+    "metrics": {
+        "http_req_connecting": {
+            "med": 0.25345,
+            "max": 0.6482,
+            "p(90)": 0.59277,
+            "p(95)": 0.621255,
+            "avg": 0.27662222222222227,
+            "min": 0
+        },
+        "http_req_duration": {
+            "med": 2.3901,
+            "max": 7.7522,
+            "p(90)": 4.86503,
+            "p(95)": 5.467144999999997,
+            "avg": 3.0314,
+            "min": 1.5223
+        },
+        "data_received": {
+            "count": 3574,
+            "rate": 322.4297613964734
+        },
+        "checks": {
+            "passes": 17,
+            "fails": 0,
+            "thresholds": {
+                "rate==1": false
+            },
+            "value": 1
+        },
+        "http_req_waiting": {
+            "avg": 2.6236166666666674,
+            "min": 1.0484,
+            "med": 1.6757499999999999,
+            "max": 6.8711,
+            "p(90)": 4.6586300000000005,
+            "p(95)": 5.093494999999997
+        },
+        "http_req_receiving": {
+            "avg": 0.3202055555555556,
+            "min": 0,
+            "med": 0,
+            "max": 0.9789,
+            "p(90)": 0.88836,
+            "p(95)": 0.9163399999999999
+        },
+        "http_req_failed": {
+            "passes": 0,
+            "fails": 18,
+            "thresholds": {
+                "rate==0": false
+            },
+            "value": 0
+        },
+        "data_sent": {
+            "count": 1768,
+            "rate": 159.50078851398013
+        },
+        "vus_max": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "http_req_duration{expected_response:true}": {
+            "avg": 3.0314,
+            "min": 1.5223,
+            "med": 2.3901,
+            "max": 7.7522,
+            "p(90)": 4.86503,
+            "p(95)": 5.467144999999997
+        },
+        "iteration_duration": {
+            "p(90)": 11061.9102,
+            "p(95)": 11061.9102,
+            "avg": 11061.9102,
+            "min": 11061.9102,
+            "med": 11061.9102,
+            "max": 11061.9102
+        },
+        "http_req_blocked": {
+            "p(90)": 0.67898,
+            "p(95)": 3.2686699999999758,
+            "avg": 1.2885722222222225,
+            "min": 0,
+            "med": 0.5074000000000001,
+            "max": 17.5366
+        },
+        "iterations": {
+            "count": 1,
+            "rate": 0.09021537811876704
+        },
+        "http_reqs": {
+            "count": 18,
+            "rate": 1.6238768061378068,
+            "thresholds": {
+                "count>0": false
+            }
+        },
+        "http_req_sending": {
+            "med": 0,
+            "max": 0.5316,
+            "p(90)": 0.52156,
+            "p(95)": 0.525565,
+            "avg": 0.08757777777777777,
+            "min": 0
+        },
+        "http_req_tls_handshaking": {
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        }
+    },
+    "root_group": {
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {},
+        "checks": {
+                "simulated failure or already-open circuit returns 503": {
+                    "path": "::simulated failure or already-open circuit returns 503",
+                    "id": "7b6021ba4e9e96a4e5ea1c5a900a4921",
+                    "passes": 10,
+                    "fails": 0,
+                    "name": "simulated failure or already-open circuit returns 503"
+                },
+                "open circuit blocks a healthy request": {
+                    "passes": 2,
+                    "fails": 0,
+                    "name": "open circuit blocks a healthy request",
+                    "path": "::open circuit blocks a healthy request",
+                    "id": "a11c45bc166476265544bca672e25541"
+                },
+                "healthy downstream returns its own service name": {
+                    "passes": 4,
+                    "fails": 0,
+                    "name": "healthy downstream returns its own service name",
+                    "path": "::healthy downstream returns its own service name",
+                    "id": "91ac418f281578351dd5150f82870739"
+                },
+                "original demo remains independent": {
+                    "name": "original demo remains independent",
+                    "path": "::original demo remains independent",
+                    "id": "0c85d120fc41b860c3adecf1a05cc9d7",
+                    "passes": 1,
+                    "fails": 0
+                }
+            }
+    }
+}
